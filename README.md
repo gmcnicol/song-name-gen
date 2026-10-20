@@ -68,7 +68,7 @@ Add opted-in bands to `bot/bands.json` as objects containing `handle` and
 For example: `{"bands": [{"handle": "example.bsky.social", "opted_in": true}]}`.
 Only opt in bands with their permission; automatically tagging strangers can be spam.
 
-### Scheduled on Linux/N​​UC via systemd
+### Scheduled on Linux/NUC via systemd
 
 The repo includes `deploy/non-sequitur.service` and `.timer`. Assuming the repo is
 cloned to `~/src/song-name-gen` and `uv` is in `~/.local/bin`, configure a rootless
@@ -80,6 +80,7 @@ printf 'BLUESKY_HANDLE=yourbot.bsky.social\nBLUESKY_APP_PASSWORD=your-app-passwo
 chmod 600 ~/.config/non-sequitur/bluesky.env
 cp deploy/non-sequitur.* ~/.config/systemd/user/
 systemctl --user daemon-reload
+loginctl enable-linger "$USER"        # keep user timers active after logout
 systemctl --user enable --now non-sequitur.timer
 systemctl --user list-timers non-sequitur.timer
 ```
@@ -88,6 +89,7 @@ The timer runs at 11:17 Europe/London daily, with catch-up after downtime.
 Change the `WorkingDirectory` / `ExecStart` paths in the service if your
 checkout or `uv` location differs. Check output using
 `journalctl --user -u non-sequitur.service -n 50`.
+The wordlists have no moderation filter; review them before unattended public posting.
 The bot is **not** activated by committing the repo: you'll need to create
 credentials and enable the timer yourself. Use `--dry-run` first.
 

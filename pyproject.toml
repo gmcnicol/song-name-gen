@@ -2,7 +2,7 @@
 name = "non-sequitur"
 version = "0.1.0"
 description = "Song titles that make grammatical sense and absolutely no other sense"
-requires-python = ">=3.11"
+requires-python = ">=3.11,<3.15"
 dependencies = []
 
 [project.optional-dependencies]
