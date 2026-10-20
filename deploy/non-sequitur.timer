@@ -1,0 +1,10 @@
+[Unit]
+Description=Post one nonsensical song title to Bluesky every day
+
+[Timer]
+OnCalendar=*-*-* 11:17:00 Europe/London
+Persistent=true
+Unit=non-sequitur.service
+
+[Install]
+WantedBy=timers.target

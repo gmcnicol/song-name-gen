@@ -1,0 +1,13 @@
+[Unit]
+Description=Non Sequitur - daily Bluesky song-title gift
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/src/song-name-gen
+EnvironmentFile=%h/.config/non-sequitur/bluesky.env
+ExecStart=%h/.local/bin/uv run --extra bot python -m bot.post_daily
+
+[Install]
+WantedBy=default.target
