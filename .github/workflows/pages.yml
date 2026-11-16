@@ -28,6 +28,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Run offline generator tests
+        run: python3 -m unittest discover -v
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 

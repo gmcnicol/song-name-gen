@@ -19,7 +19,7 @@ COUPLERS = (
     "through", "towards", "under", "underneath", "within", "without",
     "with", "in front of", "instead of",
 )
-PATTERNS = ("verb", "coupled", "and", "ongoing")
+PATTERNS = ("verb", "coupled", "and", "ongoing", "the")
 TIMING_LINKS = ("while", "as", "waiting")
 
 
@@ -33,6 +33,12 @@ def words(category: str) -> tuple[str, ...]:
     if not result:
         raise SystemExit(f"Wordlist {path} is empty")
     return result
+
+
+@lru_cache(maxsize=1)
+def the_words() -> tuple[str, ...]:
+    """Any dictionary word can follow 'The', including the article itself."""
+    return (*words("nouns"), *words("adjectives"), *words("verbs"), "the")
 
 
 def gerund(verb: str) -> str:
@@ -87,6 +93,8 @@ def title(rng: random.Random, pattern: str = "all") -> str:
         if link == "waiting":
             return f"{first_verb} Waiting for the {noun()} to {rng.choice(words('verbs')).capitalize()}"
         return f"{first_verb} {link.capitalize()} the {noun()} {third_person(rng.choice(words('verbs'))).capitalize()}"
+    if pattern == "the":
+        return f"The {rng.choice(the_words()).capitalize()}"
     raise ValueError(f"Unknown pattern: {pattern}")
 
 

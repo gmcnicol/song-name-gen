@@ -3,6 +3,7 @@ import json
 import random
 import re
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 from song_titles import PATTERNS, gerund, third_person, title
@@ -34,7 +35,15 @@ class WordForms(unittest.TestCase):
                 titles = [title(random.Random(seed), pattern) for seed in range(12)]
                 self.assertEqual(len(titles), 12)
                 self.assertTrue(all(t.strip() for t in titles))
-                self.assertTrue(all(" the " in t.lower() for t in titles))
+                self.assertTrue(all(t.startswith("The ") or " the " in t.lower() for t in titles))
+                if pattern == "the":
+                    self.assertTrue(all(t.startswith("The ") for t in titles))
+
+    def test_the_pattern_is_independently_random_across_word_types(self):
+        for source in ("pudding", "unsteady", "collapse", "the"):
+            with self.subTest(source=source):
+                with patch("song_titles.the_words", return_value=(source,)):
+                    self.assertEqual(title(random.Random(3), "the"), f"The {source.capitalize()}")
 
     def test_seed_reproducibility(self):
         self.assertEqual(title(random.Random(42), "ongoing"), title(random.Random(42), "ongoing"))
@@ -55,7 +64,8 @@ class WordForms(unittest.TestCase):
             expected = (ROOT / "wordlists" / f"{category}.txt").read_text(encoding="utf-8").splitlines()
             self.assertEqual(embedded[category], expected)
         self.assertIn('option value="ongoing"', page)
-        self.assertIn("'verb', 'coupled', 'and', 'ongoing'", page)
+        self.assertIn('option value="the"', page)
+        self.assertIn("'verb', 'coupled', 'and', 'ongoing', 'the'", page)
 
 
 if __name__ == "__main__":

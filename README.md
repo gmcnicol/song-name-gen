@@ -1,6 +1,6 @@
 # Non Sequitur — Random Song Title Generator
 
-**Incoherence is a feature.** Four grammatical patterns, tens of thousands of dictionary words, and no attempt to make the combinations mean anything. All selections are independent: no semantic matching, safety filter, theme, AI scoring or deduplication.
+**Incoherence is a feature.** Five grammatical patterns, tens of thousands of dictionary words, and no attempt to make the combinations mean anything. All selections are independent: no semantic matching, safety filter, theme, AI scoring or deduplication.
 
 ## Website (GitHub Pages / Google Sites)
 
@@ -27,6 +27,7 @@ Python 3.8+ (standard library only):
 python3 song_titles.py                   # 12 random titles
 python3 song_titles.py -n 30            # 30 titles
 python3 song_titles.py -p ongoing -n 20 # the fourth pattern
+python3 song_titles.py -p the -n 20     # The + random word
 python3 song_titles.py --seed 1979      # reproducible list
 python3 -m unittest discover -v         # run tests
 ```
@@ -37,6 +38,7 @@ python3 -m unittest discover -v         # run tests
 2. **Noun + coupling phrase + adjective + noun** — `Semaphore Beneath the Liquid Pension`
 3. **Noun and the Noun** — `Cemetery and the Apricot`
 4. **Verbing [while / as / waiting] the Noun Verbs** — `Dissolving While the Tribunal Sneezes`; waiting takes the form `Dissolving Waiting for the Tribunal to Sneeze`
+5. **The + random word** — `The Pudding`, `The Unsteady`, `The Collapse`; every noun, adjective and verb is eligible, and `The The` is possible
 
 Only the grammar is constrained. Accidental sense, oddities, repetitions and nonsense are all welcome.
 

@@ -40,11 +40,12 @@
   <div class="controls">
     <label for="pattern">Structure
       <select id="pattern">
-        <option value="all">All four structures</option>
+        <option value="all">All five structures</option>
         <option value="verb">Verb the Noun</option>
         <option value="coupled">Noun + connector + Adjective Noun</option>
         <option value="and">Noun and the Noun</option>
         <option value="ongoing">Verbing While / As / Waiting</option>
+        <option value="the">The + random word</option>
       </select>
     </label>
     <label for="count">Number of titles
@@ -67,8 +68,9 @@
 'use strict';
 const lexicon = JSON.parse(document.getElementById('lexicon').textContent);
 const couplers = ["above","after","against","alongside","amid","among","around","atop","before","behind","below","beneath","beside","beyond","despite","during","inside","near","outside","over","past","through","towards","under","underneath","within","without","with","in front of","instead of"];
-const patterns = ['verb', 'coupled', 'and', 'ongoing'];
+const patterns = ['verb', 'coupled', 'and', 'ongoing', 'the'];
 const timingLinks = ['while', 'as', 'waiting'];
+const theWords = [...lexicon.nouns, ...lexicon.adjectives, ...lexicon.verbs, 'the'];
 let currentTitles = [];
 function pick(pool) {
   // Draw independently. There is intentionally no semantic connection among choices.
@@ -108,6 +110,7 @@ function generateTitle(pattern) {
   if (pattern === 'verb') return `${upper(pick(lexicon.verbs))} the ${noun()}`;
   if (pattern === 'coupled') return `${noun()} ${upper(pick(couplers))} the ${upper(pick(lexicon.adjectives))} ${noun()}`;
   if (pattern === 'and') return `${noun()} and the ${noun()}`;
+  if (pattern === 'the') return `The ${upper(pick(theWords))}`;
   if (pattern === 'ongoing') {
     const action = upper(gerund(pick(lexicon.verbs)));
     const link = pick(timingLinks);
