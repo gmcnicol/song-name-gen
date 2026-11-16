@@ -2,11 +2,22 @@
 
 **Incoherence is a feature.** Four grammatical patterns, tens of thousands of dictionary words, and no attempt to make the combinations mean anything. All selections are independent: no semantic matching, safety filter, theme, AI scoring or deduplication.
 
-## Browser (GitHub Pages)
+## Website (GitHub Pages / Google Sites)
 
-Open **`index.html`** in any modern browser, or enable **GitHub Pages** for the `main` branch at **`/(root)`** once the repository is public. Everything works offline; the entire wordlist is embedded in the HTML, with no external requests or dependencies.
+The self-contained `index.html` is ready to host, with no server, external requests, or runtime dependencies. On GitHub, visit **Settings → Pages** and set **Build and deployment → Source → GitHub Actions** once. The committed [Pages workflow](.github/workflows/pages.yml) then publishes the generator whenever `index.html` changes. Check the Actions tab for the first deployment. The site URL will be:
 
-Pick a pattern, generate a batch, copy all titles, or press **R** for another batch.
+https://gmcnicol.github.io/song-name-gen/
+
+To use **Google Sites** as a public-facing site:
+
+1. Visit https://sites.google.com/new and create a site named **Non Sequitur**.
+2. Select **Pages → + → Full page embed** and give the page a name, such as **Generator**.
+3. Embed the GitHub Pages URL above (after the Pages deployment succeeds).
+4. Click **Publish**, set the Google Sites address and public access, and publish.
+
+Google Sites' current API cannot create or publish modern sites automatically; these editor actions require the site owner. Google Sites allows full-page URL embeds, but websites can prevent embedding. If the embed is blocked, link to the GitHub Pages site instead.
+
+You can also open `index.html` locally in any modern browser. Pick a pattern, generate a batch, copy all titles, or press **R** for another batch.
 
 ## CLI
 
