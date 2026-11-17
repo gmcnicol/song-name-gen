@@ -55,6 +55,16 @@ class WordForms(unittest.TestCase):
         self.assertTrue(any(" While the " in t for t in results))
         self.assertTrue(any(" As the " in t for t in results))
 
+    def test_support_link_and_single_title_copy(self):
+        page = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn('href="https://buymeacoffee.com/garethmcnicol"', page)
+        self.assertIn('rel="noopener noreferrer"', page)
+        self.assertLess(page.index('class="support"'), page.index('<ol id="titles"'))
+        self.assertIn("button.className = 'copy-title';", page)
+        self.assertIn("button.addEventListener('click', () => copyTitle(t, button));", page)
+        self.assertIn("async function copyTitle(title, button)", page)
+        self.assertIn("async function copyAll()", page)
+
     def test_html_embeds_wordlists_and_all_patterns(self):
         page = (ROOT / "index.html").read_text(encoding="utf-8")
         match = re.search(r'<script type="application/json" id="lexicon">(.*?)</script>', page, re.DOTALL)

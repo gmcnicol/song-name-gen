@@ -17,7 +17,7 @@ To use **Google Sites** as a public-facing site:
 
 Google Sites' current API cannot create or publish modern sites automatically; these editor actions require the site owner. Google Sites allows full-page URL embeds, but websites can prevent embedding. If the embed is blocked, link to the GitHub Pages site instead.
 
-You can also open `index.html` locally in any modern browser. Pick a pattern, generate a batch, copy all titles, or press **R** for another batch.
+You can also open `index.html` locally in any modern browser. Pick a pattern, generate a batch, copy individual titles or the entire batch, or press **R** for another batch. A [Buy Me a Coffee](https://buymeacoffee.com/garethmcnicol) link appears immediately above the title list.
 
 ## CLI
 
